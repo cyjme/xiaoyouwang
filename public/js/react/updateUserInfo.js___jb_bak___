@@ -1,0 +1,23 @@
+var Form = React.createClass({
+    render: function () {
+        return (
+            <div>
+                <form className="form" onsubmit="this.handleSubmit">
+                    <div className="form-group">
+                        <label htmlFor="">姓名：</label>
+                        <input type="text" ref="name"/>
+                    </div>
+                    <div className="form-group">
+                        <label for=""></label>
+                    </div>
+                </form>
+            </div>
+        );
+    }
+});
+
+
+ReactDOM.render(
+    <Form />,
+    document.getElementById('updateUserInfo')
+);

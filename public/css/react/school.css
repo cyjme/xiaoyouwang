@@ -1,0 +1,88 @@
+body{
+    background-image: url("/images/school_background.webp");
+    font-family: punctuation,"PingFangSC-Regular","Microsoft Yahei","sans-serif";
+}
+
+.sendTrend{
+    margin-bottom:100px;
+}
+.header{
+    padding: 12px;
+    color:#8c8c8c
+}
+.header-name{
+    color:#333;
+}
+.header-qianMing{
+    margin-left: -10px;
+}
+.header-time{
+    margin-top: 6px;
+}
+.trend{
+    border-bottom: 1px solid;
+    border-color: #d9d9d9;
+}
+.trendContent{
+    font-family: punctuation,"PingFangSC-Regular","Microsoft Yahei","sans-serif";
+}
+.agree{
+    background-color: #FAFAFA;
+    margin-bottom: 10px;
+}
+.commentList{
+    background-color: #FAFAFA;
+}
+.left_touxiang{
+
+}
+.right{
+
+}
+
+
+.bottom{
+
+}
+.time{
+
+}
+
+.pinglun{
+    background-image: url("/images/comment.png");
+    background-repeat: no-repeat;
+    background-size: 20px;
+    padding-left: 28px;
+}
+.zhuanfa{
+    background-image: url("/images/zhuanfa.png");
+    background-repeat: no-repeat;
+    background-size: 20px;
+    padding-left: 28px;
+}
+.zan{
+    background-image: url("/images/agree.png");
+    background-repeat: no-repeat;
+    background-size: 20px;
+    padding-left: 28px;
+}
+.shoucang{
+    background-image: url("/images/shoucang.png");
+    background-repeat: no-repeat;
+    background-size: 20px;
+    padding-left: 28px;
+}
+.commentUserName{
+    font-weight: bold;
+}
+
+
+
+.schoolBox{
+    padding: 6px;
+    margin-top: 50px;
+    background-color: #fff;
+    border:  1px solid;
+    border-radius: 3px;
+    border-color: #d9d9d9;
+}
