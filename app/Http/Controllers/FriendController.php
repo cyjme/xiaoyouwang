@@ -21,11 +21,14 @@ class FriendController extends Controller
 //Route::get('/friend/getAll', 'FriendController@getAll');
 ////删除当前用户的某个好友
 //Route::post('/friend/delete', 'FriendController@delete');
+
+
+//添加好友
   public function add(Request $request)
   {
     $friend            = new Friend();
     $friend->user_id   = Auth::user()->id;
-    $friend->friend_id = $request->user_id;
+    $friend->friend_id = $request->friend_id;
     $friend->save();
     return response()->json(['info' => 'addFriend Success']);
   }
@@ -51,8 +54,9 @@ class FriendController extends Controller
   {
     $friend_id = $request->friend_id;
     $user_id   = Auth::user()->id;
-    $friend    = Friend::where('user_id', $user_id)
-                       ->where('id', $friend_id);
+    $friend    = Friend::where('friend_id', $friend_id)
+                       ->where('user_id', $user_id)
+                       ->first();
     $friend->delete();
     return response()->json(['results' => 'delete success']);
   }

@@ -51,6 +51,7 @@
         </a>
     </div>
 {!! csrf_field() !!}
+
 <div  class="col-lg-4 col-lg-offset-4" style="margin-top:170px;">
     <div class="col-lg-10 col-lg-offset-1">
         {!! Form::open(['url'=>'/auth/login','id'=>'myform']) !!}

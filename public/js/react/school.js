@@ -1,4 +1,4 @@
-var data = {
+var trends = [{
     touXiangUrl: '/images/touxiang/touxiang.jpg',
     name: '梁凯莉',
     qianMing: '这是个性签名',
@@ -18,66 +18,16 @@ var data = {
     ],
     commentNumber: '34',
     agreeNumber: '45'
+}
+];
 
-};
-
-var SendTrend = React.createClass({
-    render: function () {
-        return (
-            <div className="SendTrend">
-                <div className="row">
-                    <div>
-                        <textarea name="" id="" placeholder="说点什么吧" className="col-lg-12" height="120px">
-
-                        </textarea>
-                    </div>
-                    <div>
-                        <button className="btn btn-block">发布</button>
-                    </div>
-                </div>
-
-            </div>
-        );
-    }
-});
-
-var Header = React.createClass({
-    render: function () {
-        return (
-            <div className="header col-lg-12">
-                <div className="left-touXiang col-lg-2">
-                    <img src={this.props.data.touXiangUrl} alt="用户头像"/>
-                </div>
-                <div className="right col-lg-10">
-                    <div className="row">
-                        <div className="top row">
-                            <div className="header-name col-lg-2">
-                                {this.props.data.name}
-                            </div>
-                            <div className="qianMing col-lg-10">
-                                {this.props.data.qianMing}
-                            </div>
-                        </div>
-                    </div>
-                    <div className="header-time row">
-                        <div className="bottom row">
-                            <div className="time col-lg-12">
-                                {this.props.data.time}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        )
-    }
-});
 var Trend = React.createClass({
     render: function () {
         return (
             <div className="trend col-lg-12">
                 <div>
                     <p className="trendContent">{this.props.data.content}</p>
-                    <img src={this.props.data.imageUrl} alt="动态关联的照片" className="img-responsive" />
+                    <img src={this.props.data.imageUrl} alt="动态关联的照片" className="img-responsive"/>
                 </div>
             </div>
         );
@@ -142,8 +92,40 @@ var CommentForm = React.createClass({
                 <div className="col-lg-12">
                     <div>
                         <form action="">
-                            <input type="text" className="col-lg-12" placeholder="我也说一句"/>
+                            <input type="text" className="col-lg-10" placeholder="我也说一句"/>
+                            <button type="submit" className="col-lg-2">评论</button>
                         </form>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+});
+
+var Header = React.createClass({
+    render: function () {
+        return (
+            <div className="header col-lg-12">
+                <div className="left-touXiang col-lg-2">
+                    <img src={this.props.data.touXiangUrl} alt="用户头像"/>
+                </div>
+                <div className="right col-lg-10">
+                    <div className="row">
+                        <div className="top row">
+                            <div className="header-name col-lg-2">
+                                {this.props.data.name}
+                            </div>
+                            <div className="qianMing col-lg-10">
+                                {this.props.data.qianMing}
+                            </div>
+                        </div>
+                    </div>
+                    <div className="header-time row">
+                        <div className="bottom row">
+                            <div className="time col-lg-12">
+                                {this.props.data.time}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -156,28 +138,69 @@ var SchoolBox = React.createClass({
 
         return (
             <div className="schoolBox row">
-                <Header data={data}/>
-                <Trend data={data}/>
-                <Agree data={data}/>
-                <CommentList data={data}/>
-                <CommentForm />
+                <Header data={this.props.data} />
+                <Trend data={this.props.data}/>
+                <Agree data={this.props.data}/>
+                {/*<CommentList data={this.props.data}/> */}
+                <CommentForm data={this.props.data.trendId}/>
+            </div>
+        );
+    }
+});
+
+var SchoolList = React.createClass({
+    render: function () {
+        var schoolBoxNode = this.props.data.map(function (trend) {
+            return (
+                <div>
+                    <SchoolBox data={trend}/>
+                </div>
+            );
+        });
+
+        return (
+            <div>
+                {schoolBoxNode}
             </div>
         );
     }
 });
 
 var School = React.createClass({
+    getInitialState: function () {
+        return {data:[]};
+    },
+
+    componentDidMount: function () {
+        $.ajax({
+            url: this.props.url,
+            dataType:'json',
+            cache: false,
+            success: function (data) {
+                console.log(data.trends);
+                this.setState({data:data.trends});
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.error(this.props.url, status, err.toString());
+            }.bind(this)
+        });
+    },
+
     render: function () {
         return (
             <div>
-                <SendTrend />
-                <SchoolBox />
+                <SchoolList data={this.state.data} />
             </div>
-        );
+        )
     }
+
 });
 
+//ReactDOM.render(
+//    <School data={trends}/>,
+//    document.getElementById('school')
+//);
 ReactDOM.render(
-    <School />,
+    <School url="http://xiaoyouwang.com/trend/getSchool"/>,
     document.getElementById('school')
 );

@@ -46,12 +46,16 @@
                 <li><a href="/school">校友动态</a></li>
                 <li><a href="/friends">好友动态</a></li>
                 <li><a href="/myFriends">我的好友</a></li>
+                <li><a href="/trend/put">发布动态</a></li>
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
                 {{--判断用户是否登录--}}
                 @if(Auth::check())
-                    <button type="button" class="btn btn-default navbar-btn">{{Auth::user()['name']}}</button>
+                    <a href="/user/inputUserInfo">
+                        <button type="button" class="btn btn-default navbar-btn">{{Auth::user()['name']}}</button>
+                    </a>
+
                     <a href="/auth/logout">
                         <button type="button" class="btn btn-default navbar-btn" style="margin-right: 80px;" >退出</button>
                     </a>

@@ -44,9 +44,9 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 //登录后跳转，填写个人信息
 Route::get('/user/inputUserInfo', 'UserController@inputUserInfo');
 //提交用户信息
-Route::post('/home/updateUserInfo','UserController@updateUserInfo');
+Route::post('/home/updateUserInfo/{id}','UserController@updateUserInfo');
 //获取用户信息
-Route::get('/user/getInfo', 'UserController@getInfo');
+Route::get('/user/getInfo/{id}', 'UserController@getInfo');
 
 
 //TODO
@@ -65,7 +65,8 @@ Route::post('/friend/delete', 'FriendController@delete');
 
 //-------------------动态分享模块
 //发表动态
-Route::post('/trend/put', 'TrendController@put');
+Route::get('/trend/put', 'TrendController@put');
+Route::post('/trend/post', 'TrendController@post');
 //删除动态
 Route::post('/trend/delete', 'TrendController@delete');
 //获取好友动态

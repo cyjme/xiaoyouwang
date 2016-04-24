@@ -1,9 +1,8 @@
 var SchoolInfo = React.createClass({
 
-    handleSubmit: function (e) {
+    handleSubmitSchool: function (e) {
         e.preventDefault();
-        console.log('ewre');
-        var name = this.refs.name.value.trim();
+        console.log('上传学校信息');
         var school_name = this.refs.school_name.value.trim();
         var faculty = this.refs.faculty.value.trim();
         var major = this.refs.major.value.trim();
@@ -12,7 +11,6 @@ var SchoolInfo = React.createClass({
         var phone_number = this.refs.phone_number.value.trim();
         var interest = this.refs.interest.value.trim();
         var userInfo = {
-            name: name,
             school_name: school_name,
             faculty: faculty,
             major: major,
@@ -23,11 +21,11 @@ var SchoolInfo = React.createClass({
         };
         $.ajax({
             type: 'POST',
-            url: '/home/updateUserInfo',
+            url: '/home/updateUserInfo/school',
             dataType: 'json',
             data: userInfo,
             success: function (data) {
-                alert(data.name);
+                alert('学校信息已更新');
             }.bind(this),
             error: function (xhr, status, err) {
                 console.log(status, err.toString());
@@ -44,11 +42,7 @@ var SchoolInfo = React.createClass({
                 </div>
                 <div className="panel-body">
                     <div>
-                        <form className="form" onSubmit={this.handleSubmit}>
-                            <div className="form-group">
-                                <label for="name">姓名：</label>
-                                <input type="text" className="form-control" ref="name"/>
-                            </div>
+                        <form className="form" onSubmit={this.handleSubmitSchool}>
                             <div className="form-group">
                                 <label for="">学校名字：</label>
                                 <select name="" id="" ref="school_name" className="form-control">
@@ -99,14 +93,37 @@ var SchoolInfo = React.createClass({
 });
 
 var WorkInfo = React.createClass({
-    render:function() {
+    handleSubmitWork: function (e) {
+        e.preventDefault();
+        console.log('上传工作信息');
+        var company = this.refs.company.value.trim();
+        var city = this.refs.city.value.trim();
+        var userInfo = {
+            company: company,
+            city: city
+        };
+        $.ajax({
+            type: 'POST',
+            url: '/home/updateUserInfo/work',
+            dataType: 'json',
+            data: userInfo,
+            success: function (data) {
+                alert('工作信息已更新');
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.log(status, err.toString());
+            }.bind(this)
+        });
+    },
+
+    render: function () {
         return (
             <div className="panel panel-default">
                 <div className="panel-heading">
                     工作信息
                 </div>
                 <div className="panel-body">
-                    <form onSubmit="">
+                    <form onSubmit={this.handleSubmitWork}>
                         <div className="form-group">
                             <label for="">公司</label>
                             <input type="text" className="form-control" ref="company"/>
@@ -126,7 +143,34 @@ var WorkInfo = React.createClass({
 });
 
 var BasicInfo = React.createClass({
-    render:function() {
+    handleSubmitBasic: function (e) {
+        e.preventDefault();
+        console.log('上传基本信息');
+        var name = this.refs.name.value.trim();
+        var sex = this.refs.sex.value.trim();
+        var jiaxiang = this.refs.jiaxiang.value.trim();
+        var gexingqianming = this.refs.gexingqianming.value.trim();
+        var userInfo = {
+            name: name,
+            sex: sex,
+            jiaxiang: jiaxiang,
+            gexingqianming: gexingqianming
+        };
+        $.ajax({
+            type: 'POST',
+            url: '/home/updateUserInfo/basic',
+            dataType: 'json',
+            data: userInfo,
+            success: function (data) {
+                alert('基本信息已更新');
+            }.bind(this),
+            error: function (xhr, status, err) {
+                console.log(status, err.toString());
+            }.bind(this)
+        });
+    },
+
+    render: function () {
         return (
             <div>
                 <div className="panel panel-default">
@@ -134,9 +178,9 @@ var BasicInfo = React.createClass({
                         基本信息
                     </div>
                     <div className="panel-body">
-                        <form action="" onSubmit="">
+                        <form action="" onSubmit={this.handleSubmitBasic}>
                             <div className="form-group">
-                                <label for="" >姓名：</label>
+                                <label for="">姓名：</label>
                                 <input type="text" className="form-control" ref="name"/>
                             </div>
                             <div className="form-group">
@@ -148,10 +192,15 @@ var BasicInfo = React.createClass({
                             </div>
                             <div className="form-group">
                                 <label for="">家乡：</label>
-                                <input type="text" className="form-control"/>
+                                <input type="text" className="form-control" ref="jiaxiang"/>
                             </div>
                             <div className="form-group">
-                                <button type="submit" className="btn btn-success">更新信息</button>
+                                <label for="">个性签名</label>
+                                <input type="text" className="form-control" ref="gexingqianming"/>
+
+                            </div>
+                            <div className="form-group">
+                                <button type="submit" className="form-control btn btn-success">更新信息</button>
                             </div>
                         </form>
 
