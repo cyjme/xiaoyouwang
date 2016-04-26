@@ -11,7 +11,7 @@
         @foreach($sameSchools as $sameSchool)
             <div class="row" style="margin-top: 30px;">
                 <div class="col-lg-1">
-                    <img src="/touxiang/{{$sameSchool->avator_url}}.png" alt="用户头像">
+                    <img src="{{$sameSchool->avator_url}}" alt="用户头像">
                 </div>
                 <div class="col-lg-4">
                     <div class="row">
@@ -38,7 +38,7 @@
         @foreach($sameFacultys as $sameFaculty)
             <div class="row" style="margin-top: 30px;">
                 <div class="col-lg-1">
-                    <img src="/touxiang/{{$sameFaculty->avator_url}}.png" alt="用户头像">
+                    <img src="{{$sameFaculty->avator_url}}" alt="用户头像">
                 </div>
                 <div class="col-lg-4">
                     <div class="row">
@@ -65,7 +65,7 @@
         @foreach($sameGrades as $sameGrade)
             <div class="row" style="margin-top: 30px;">
                 <div class="col-lg-1">
-                    <img src="/touxiang/{{$sameGrade->avator_url}}.png" alt="用户头像">
+                    <img src="{{$sameGrade->avator_url}}" alt="用户头像">
                 </div>
                 <div class="col-lg-4">
                     <div class="row">

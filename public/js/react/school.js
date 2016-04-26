@@ -5,6 +5,7 @@ var trends = [{
     time: '19:20',
     content: '当我真的可以一个人处理所有事的时候，那便真的是做好一个人生活的准备的时候；而那时我想我会感激你，给我那么多的时间去学会做一个精神上生活上都足够强大的人',
     imageUrl: '/images/test.jpg',
+    trendId: 12,
     agree: '12',
     comments: [
         {
@@ -35,17 +36,37 @@ var Trend = React.createClass({
 });
 
 var Agree = React.createClass({
+    handleClickAgree: function () {
+        var trendId = this.props.data;
+        var data = {trendId: trendId};
+        $.ajax({
+            url: '/trend/agree',
+            type: 'POST',
+            dataType: 'json',
+            data: data,
+
+            success: function () {
+                console.log('点赞');
+            }.bind(this),
+
+            error: function () {
+                alert('点赞失败');
+            }.bind(this)
+
+        });
+    },
+
     render: function () {
         return (
             <div className="agree col-lg-12">
                 <div className="pinglun col-lg-3">
-                    <a href="">评论({this.props.data.commentNumber})</a>
+                    <span style={{color:"#337ab7"}}>评论({this.props.commentNumber})</span>
                 </div>
                 <div className="zhuanfa col-lg-3">
                     <a href="">转发</a>
                 </div>
                 <div className="zan col-lg-3">
-                    <a href="">赞({this.props.data.agreeNumber})</a>
+                    <span onClick={this.handleClickAgree} style={{color:"#337ab7"}}>赞({this.props.agreeNumber})</span>
                 </div>
                 <div className="shoucang col-lg-3">
                     <a href="">收藏</a>
@@ -86,13 +107,37 @@ var CommentList = React.createClass({
 });
 
 var CommentForm = React.createClass({
+    handleSubmit: function (e) {
+        e.preventDefault();
+        var commentText = this.refs.commentText.value.trim();
+        var trendId = this.props.data;
+        var comment = {
+            commentText: commentText,
+            trendId: trendId
+        };
+
+        $.ajax({
+            url: '/trend/putComment',
+            dataType: 'json',
+            type: 'POST',
+            data: comment,
+            success: function () {
+                alert('评论发表成功！');
+            }.bind(this),
+            error: function () {
+                alert('评论失败');
+            }.bind(this)
+        });
+        this.refs.commentText.value = "";
+    },
+
     render: function () {
         return (
             <div>
                 <div className="col-lg-12">
                     <div>
-                        <form action="">
-                            <input type="text" className="col-lg-10" placeholder="我也说一句"/>
+                        <form onSubmit={this.handleSubmit}>
+                            <input type="text" className="col-lg-10" placeholder="我也说一句" ref="commentText"/>
                             <button type="submit" className="col-lg-2">评论</button>
                         </form>
                     </div>
@@ -138,10 +183,10 @@ var SchoolBox = React.createClass({
 
         return (
             <div className="schoolBox row">
-                <Header data={this.props.data} />
+                <Header data={this.props.data}/>
                 <Trend data={this.props.data}/>
-                <Agree data={this.props.data}/>
-                {/*<CommentList data={this.props.data}/> */}
+                <Agree data={this.props.data.trendId} commentNumber={this.props.data.commentNumber} agreeNumber={this.props.data.agree}/>
+                <CommentList data={this.props.data}/>
                 <CommentForm data={this.props.data.trendId}/>
             </div>
         );
@@ -167,18 +212,14 @@ var SchoolList = React.createClass({
 });
 
 var School = React.createClass({
-    getInitialState: function () {
-        return {data:[]};
-    },
-
-    componentDidMount: function () {
+    loadTrendsFromServer: function () {
         $.ajax({
             url: this.props.url,
-            dataType:'json',
+            dataType: 'json',
             cache: false,
             success: function (data) {
                 console.log(data.trends);
-                this.setState({data:data.trends});
+                this.setState({data: data.trends});
             }.bind(this),
             error: function (xhr, status, err) {
                 console.error(this.props.url, status, err.toString());
@@ -186,10 +227,19 @@ var School = React.createClass({
         });
     },
 
+    getInitialState: function () {
+        return {data: []};
+    },
+
+    componentDidMount: function () {
+        this.loadTrendsFromServer();
+        setInterval(this.loadTrendsFromServer, this.props.pollInterbval);
+    },
+
     render: function () {
         return (
             <div>
-                <SchoolList data={this.state.data} />
+                <SchoolList data={this.state.data}/>
             </div>
         )
     }
@@ -201,6 +251,6 @@ var School = React.createClass({
 //    document.getElementById('school')
 //);
 ReactDOM.render(
-    <School url="http://xiaoyouwang.com/trend/getSchool"/>,
+    <School url="http://xiaoyouwang.com/trend/getSchool" pollInterbval={1000}/>,
     document.getElementById('school')
 );

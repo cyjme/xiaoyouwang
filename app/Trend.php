@@ -4,11 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Friend extends Model
+class Trend extends Model
 {
-  //
-  protected $table = 'friends';
-
-
-
+    //
+  protected $table = 'trends';
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Trend;
 use App\User;
 use Illuminate\Http\Request;
@@ -32,23 +33,31 @@ class TrendController extends Controller
     //用于存储动态的数组
     $array  = [];
     $trends = Trend::join('users', 'user_id', '=', 'users.id')
-                   ->select('avator_url','name', 'gexingqianming',
-                     'trends.created_at', 'content', 'imageUrl','trend.id')->get();
+                   ->select('avator_url', 'name', 'gexingqianming',
+                     'trends.created_at', 'content', 'imageUrl', 'trends.id', 'agreeNumber')->orderBy('created_at', 'desc')->get();
     for ($i = 0; $i < count($trends); $i++) {
       $a         = $trends[$i];
+      $trend_id  = $a->id;
+      $comments  = Comment::join('users', 'user_id', '=', 'users.id')
+                          ->where('trend_id', $trend_id)
+                          ->select('commentContent', 'name AS userName')
+                          ->get();
       $array[$i] = [
         'touXiangUrl' => $a->avator_url,
         'name'        => $a->name,
         'qianMing'    => $a->gexingqianming,
-//        'time'        => $a->created_at,
+        'time'        => $a->created_at->toTimeString(),
         'content'     => $a->content,
         'imageUrl'    => $a->imageUrl,
-        'trendId'=>$a->id
+        'trendId'     => $a->id,
+        'agree'       => $a->agreeNumber,
+        'comments'    => $comments,
+        'commentNumber'=>count($comments)
       ];
     }
 
 
-    return response()->json(['trends'=>$array]);
+    return response()->json(['trends' => $array]);
 
 
   }
@@ -73,9 +82,26 @@ class TrendController extends Controller
       $trend['imageUrl'] = $imageUrl;
       $trend->save();
     }
-
     return redirect('/school');
   }
 
 
+  public function putComment(Request $request)
+  {
+    $comment                 = new Comment();
+    $comment->trend_id       = $request->trendId;
+    $comment->commentContent = $request->commentText;
+    $comment->user_id        = Auth::user()->id;
+    $comment->save();
+
+    return response()->json(['success']);
+  }
+
+  public function agree(Request $request)
+  {
+    $trend              = Trend::where('id', $request->trendId)->first();
+    $trend->agreeNumber = $trend->agreeNumber + 1;
+    $trend->save();
+    return response()->json(['success']);
+  }
 }

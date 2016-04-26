@@ -64,6 +64,8 @@ Route::post('/friend/delete', 'FriendController@delete');
 
 
 //-------------------动态分享模块
+//发表评论
+Route::post('/trend/putComment','TrendController@putComment');
 //发表动态
 Route::get('/trend/put', 'TrendController@put');
 Route::post('/trend/post', 'TrendController@post');
@@ -82,6 +84,8 @@ Route::post('/trend/getAgreesNumber', 'TrendController@getAgreesNumber');
 //获取评论内容
 Route::post('/trend/getComments', 'TrendController@getComments');
 
+
+
 //-------------------系统推荐模块
 //获取推荐的动态
 Route::get('/recommend/getTrends','RecommendedController@getTrends');
@@ -90,10 +94,10 @@ Route::get('/recommend/getFriends', 'RecommendedController@getFriends');
 
 
 //-------------------私信聊天模块
-//发起聊天
+//发出私信内容
 Route::post('/chat', 'ChatController@chat');
 //更新聊天内容
-Route::post('/update', 'ChatController@update');
+Route::get('/chat/update', 'ChatController@update');
 
 //-------------------网站管理模块
 //添加管理员
@@ -110,3 +114,4 @@ Route::post('/admin/deleteSchool', 'AdminController@deleteSchool ');
 Route::post('/admin/publishNotice', 'AdminController@publishNotice ');
 //删除系统通知
 Route::post('/admin/deleteNotice','AdminController@deleteNotice');
+

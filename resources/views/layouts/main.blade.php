@@ -50,6 +50,11 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
+                <a href="">
+                        <button class="btn btn-primary" type="button">
+                            Messages <span class="badge">4</span>
+                        </button>
+                </a>
                 {{--判断用户是否登录--}}
                 @if(Auth::check())
                     <a href="/user/inputUserInfo">
