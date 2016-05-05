@@ -44,7 +44,6 @@
             <ul class="nav navbar-nav" >
                 <li><a href="/special">特别推荐</a></li>
                 <li><a href="/school">校友动态</a></li>
-                <li><a href="/friends">好友动态</a></li>
                 <li><a href="/myFriends">我的好友</a></li>
                 <li><a href="/trend/put">发布动态</a></li>
             </ul>
