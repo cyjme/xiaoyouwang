@@ -17,7 +17,7 @@ class CreateTrendsTable extends Migration
       $table->string('user_id');
       $table->string('content');
       $table->string('imageUrl');
-      $table->int('agreeNumber');
+      $table->string('agreeNumber');
       $table->timestamps();
     });
   }
