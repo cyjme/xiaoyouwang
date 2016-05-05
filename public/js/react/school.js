@@ -27,7 +27,7 @@ var Trend = React.createClass({
         return (
             <div className="trend col-lg-12">
                 <div>
-                    <p className="trendContent">{this.props.data.content}</p>
+                    <p className="trendContent">{this.props. data.content}</p>
                     <img src={this.props.data.imageUrl} alt="动态关联的照片" className="img-responsive"/>
                 </div>
             </div>

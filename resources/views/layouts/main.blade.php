@@ -49,9 +49,9 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <a href="">
+                <a href="/chat/all">
                         <button class="btn btn-primary" type="button">
-                            Messages <span class="badge">4</span>
+                            Messages <span class="badge" id="messageNumber">0</span>
                         </button>
                 </a>
                 {{--判断用户是否登录--}}
@@ -89,5 +89,15 @@
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/bootstrapValidator.min.js"></script>
+<script>
+    function getNum() {
+        $.get('/chat/getNumber',function (data) {
+            console.log('getNumber'+data);
+            $('#messageNumber').text(data);
+        });
+    }
+    self.setInterval("getNum()",1000);
+</script>
+
 </body>
 </html>

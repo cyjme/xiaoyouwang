@@ -96,8 +96,9 @@ Route::get('/recommend/getFriends', 'RecommendedController@getFriends');
 //-------------------私信聊天模块
 //发出私信内容
 Route::post('/chat', 'ChatController@chat');
-//更新聊天内容
-Route::get('/chat/update', 'ChatController@update');
+//获取未读消息的数量
+Route::get('/chat/getNumber', 'ChatController@getNumber');
+Route::get('/chat/all','ChatController@xiaoxi');
 
 //-------------------网站管理模块
 //添加管理员
