@@ -2,18 +2,20 @@
 @section('content')
     <div class="special">
         <div class="row">
-            您可能认识的人。
+            <h1>您可能认识的人。</h1>
         </div>
+        <div class="col-lg-8 col-lg-offset-2">
 
         <div class="row">
             <h2>这些朋友和您是一个学校的</h2>
         </div>
+
         @foreach($sameSchools as $sameSchool)
             <div class="row" style="margin-top: 30px;">
                 <div class="col-lg-1">
                     <img src="{{$sameSchool->avator_url}}" alt="用户头像">
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-7">
                     <div class="row">
                         <span style="font-family: 'Microsoft Yahei'; font-weight: bold; margin-right: 20px;">{{$sameSchool->name}}</span>({{$sameSchool->gexingqianming}})
                     </div>
@@ -40,7 +42,7 @@
                 <div class="col-lg-1">
                     <img src="{{$sameFaculty->avator_url}}" alt="用户头像">
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-7">
                     <div class="row">
                         <span style="font-family: 'Microsoft Yahei'; font-weight: bold; margin-right: 20px;">{{$sameFaculty->name}}</span>({{$sameFaculty->gexingqianming}})
                     </div>
@@ -67,7 +69,7 @@
                 <div class="col-lg-1">
                     <img src="{{$sameGrade->avator_url}}" alt="用户头像">
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-7">
                     <div class="row">
                         <span style="font-family: 'Microsoft Yahei'; font-weight: bold; margin-right: 20px;">{{$sameGrade->name}}</span>({{$sameGrade->gexingqianming}})
                     </div>
@@ -84,6 +86,7 @@
             </div>
             <hr>
         @endforeach
+        </div>
 
 
     </div>
