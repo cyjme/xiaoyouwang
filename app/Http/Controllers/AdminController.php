@@ -81,6 +81,8 @@ class AdminController extends Controller
             $chat->have_read = '0';
             $chat->save();
         }
+
+        return redirect('/admin');
     }
     public function getNumber()
     {
