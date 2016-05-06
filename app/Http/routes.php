@@ -101,6 +101,7 @@ Route::get('/chat/getNumber', 'ChatController@getNumber');
 Route::get('/chat/all','ChatController@xiaoxi');
 
 //-------------------网站管理模块
+Route::get('/admin', 'AdminController@login');
 //添加管理员
 Route::post('/admin/add', 'AdminController@add ');
 //删除管理员
