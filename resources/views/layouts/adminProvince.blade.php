@@ -52,26 +52,16 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/admin/provinceIndex">校友网</a>
+            <a class="navbar-brand" href="/admin">校友网管理后台</a>
         </div>
         <!-- /.navbar-header -->
 
         <ul class="nav navbar-top-links navbar-right">
 
-            {{--判断用户是否登录--}}
-            @if(Auth::check())
-                <button type="button" class="btn btn-default navbar-btn">{{Auth::user()['name']}}</button>
+
                 <a href="/auth/logout">
                     <button type="button" class="btn btn-default navbar-btn" style="margin-right: 80px;" >退出</button>
                 </a>
-            @elseif(!Auth::check())
-                <a href="/auth/login">
-                    <button type="button" class="btn btn-default navbar-btn" style="margin-right: 30px;">登录</button>
-                </a>
-                <a href="/auth/logout">
-                    <button type="button" class="btn btn-default navbar-btn" style="margin-right: 80px;" >退出</button>
-                </a>
-            @endif
         </ul>
         <!-- /.navbar-top-links -->
 
@@ -79,10 +69,10 @@
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
                     <li>
-                        <a href="/admin/provinceIndex"><i class="fa fa-dashboard fa-fw"></i>校友网</a>
+                        <a href="/admin"><i class="fa fa-dashboard fa-fw"></i>校友网后台</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>所有作品<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-tasks fa-fw"></i>所有学校<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="/admin/xcxy">许昌学院</a>
@@ -101,44 +91,12 @@
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>评奖管理<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="/admin/award">评奖</a>
-                            </li>
-                            <li>
-                                <a href="/admin/queryAward">得奖统计</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
+                        <a href="/admin/tongzhi"><i class="fa  fa-bell-o fa-fw"></i>发布系统通知</a>
                     </li>
 
                     <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>专家库<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="/admin/addSpecialist">添加专家</a>
-                            </li>
-                            <li>
-                                <a href="/admin/specialistStatistics">专家统计</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
+                        <a href="http://localhost/phpmyadmin"><i class="fa fa-warning fa-fw"></i>数据库操作</a>
                     </li>
-
-                    <li>
-                        <a href="#"><i class="fa fa-wrench fa-fw"></i>信息发布<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="/admin/newArticle">发布文章</a>
-                            </li>
-                            <li>
-                                <a href="/admin/sendInformation">内部通知</a>
-                            </li>
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-
                 </ul>
             </div>
             <!-- /.sidebar-collapse -->

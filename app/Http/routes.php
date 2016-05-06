@@ -101,17 +101,16 @@ Route::get('/chat/getNumber', 'ChatController@getNumber');
 Route::get('/chat/all','ChatController@xiaoxi');
 
 //-------------------网站管理模块
-Route::get('/admin', 'AdminController@login');
-//添加管理员
-Route::post('/admin/add', 'AdminController@add ');
-//删除管理员
-Route::post('/admin/delete', 'AdminController@delete ');
-//删除用户
-Route::post('/admin/deleteUser', 'AdminController@deleteUser');
-//添加学校列表
-Route::post('/admin/addSchool', 'AdminController@addSchool');
-//删除学校列表
-Route::post('/admin/deleteSchool', 'AdminController@deleteSchool ');
+//管理后台登陆
+Route::get('/admin/login','AdminController@login');
+//进入学校管理后台
+Route::get('/admin', 'AdminController@index');
+Route::get('/admin/getNumber', 'AdminController@getNumber');
+Route::get('admin/tongzhi','AdminController@tongzhi');
+Route::post('admin/posttongzhi', 'AdminController@posttongzhi');
+Route::get('admin/{id}','AdminController@school');
+
+
 //发布系统通知
 Route::post('/admin/publishNotice', 'AdminController@publishNotice ');
 //删除系统通知

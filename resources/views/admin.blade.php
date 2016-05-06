@@ -1,10 +1,3 @@
-{{--程序名：provinceIndex.blade.php--}}
-{{--功能：省团委后台首页--}}
-{{--被调用程序名：调用程序名：--}}
-{{--安全等级：2级 --}}
-{{--编程人：李孝川 18839965525--}}
-{{--测试人：常元检 15649841368--}}
-
 @extends('layouts.adminProvince')
 @section('content')
         <!-- Morris Charts CSS -->
@@ -14,7 +7,7 @@
 <link href="../bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">校友网</h1>
+        <h1 class="page-header">所有用户</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
@@ -25,10 +18,10 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-bar-chart-o fa-5x"></i>
+                        <i class="fa fa-users fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">12</div>
+                        <div class="huge">{{$number['xcxy']}}</div>
                         <div>许昌学院</div>
                     </div>
                 </div>
@@ -47,10 +40,10 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-user fa-5x"></i>
+                        <i class="fa fa-users fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">12</div>
+                        <div class="huge">{{$number['zzdx']}}</div>
                         <div>郑州大学</div>
                     </div>
                 </div>
@@ -69,10 +62,10 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-laptop fa-5x"></i>
+                        <i class="fa fa-users fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">12</div>
+                        <div class="huge">{{$number['hndx']}}</div>
                         <div>河南大学</div>
                     </div>
                 </div>
@@ -91,10 +84,10 @@
             <div class="panel-heading">
                 <div class="row">
                     <div class="col-xs-3">
-                        <i class="fa fa-spinner fa-5x"></i>
+                        <i class="fa fa-users fa-5x"></i>
                     </div>
                     <div class="col-xs-9 text-right">
-                        <div class="huge">12</div>
+                        <div class="huge">{{$number['zzqg']}}</div>
                         <div>郑州轻工业学院</div>
                     </div>
                 </div>
@@ -163,11 +156,13 @@
 
 
 {{--获取学校作品各个分类的数量，隐藏起来，方便页面中的饼图的js调用--}}
-<input type="hidden" id="a" value="12">
-<input type="hidden" id="b" value="12">
-<input type="hidden" id="c" value="12">
-<input type="hidden" id="d" value="12">
+<input type="hidden" id="a" value="{{$number['xcxy']}}">
+<input type="hidden" id="b" value="{{$number['zzdx']}}">
+<input type="hidden" id="c" value="{{$number['hndx']}}">
+<input type="hidden" id="d" value="{{$number['zzqg']}}">
 <script>
+
+
     var a = document.getElementById('a').value;
     var b = document.getElementById('b').value;
     var c = document.getElementById('c').value;
@@ -178,25 +173,25 @@
             value: a,
             color:"#F7464A",
             highlight: "#FF5A5E",
-            label: "自然科学类"
+            label: "许昌学院"
         },
         {
             value: b,
             color: "#46BFBD",
             highlight: "#5AD3D1",
-            label: "哲学社会科学类"
+            label: "郑州大学"
         },
         {
             value: c,
             color: "#FDB45C",
             highlight: "#FFC870",
-            label: "科技发明制作Α类"
+            label: "河南大学"
         },
         {
             value: d,
             color: "#949FB1",
             highlight: "#A8B3C5",
-            label: "科技发明制作Β类"
+            label: "郑州轻工业学院"
         }
 
     ];
@@ -209,8 +204,6 @@
 
 
     window.onload = function(){
-
-
         var ctx = document.getElementById("chart-area").getContext("2d");
         window.myPie = new Chart(ctx).Pie(pieData);
     }
