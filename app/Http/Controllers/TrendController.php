@@ -89,12 +89,12 @@ class TrendController extends Controller
   public function putComment(Request $request)
   {
     $comment                 = new Comment();
-    $comment->trend_id       = $request->trendId;
-    $comment->commentContent = $request->commentText;
-    $comment->user_id        = Auth::user()->id;
-    $comment->save();
+    $comment->trend_id       = $request->trendId;   //获取动态id
+    $comment->commentContent = $request->commentText;  //获取 评论内容
+    $comment->user_id        = Auth::user()->id;   //当前的用户id
+    $comment->save();                         //保存评论
 
-    return response()->json(['success']);
+    return response()->json(['success']);    // 返回 成功的状态.
   }
 
   public function agree(Request $request)

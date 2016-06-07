@@ -15,7 +15,6 @@ class ChatController extends Controller
     {
         $user_id = Auth::user()->id;
         $chat = new Chat();
-
         $chat->send_user_id = $user_id;
         $chat->user_id = $request->friend_id;
         $chat->new = $request->sixinneirong;
@@ -44,12 +43,10 @@ class ChatController extends Controller
         $weidus = Chat::where('user_id', $user_id)
             ->where('have_read', '0')
             ->get();
-
         foreach ($weidus as $weidu) {
             $weidu->have_read=1;
             $weidu->save();
         }
-
         return view('xiaoxi',compact('xiaoxis'));
     }
 }

@@ -38,18 +38,21 @@ var Trend = React.createClass({
 var Agree = React.createClass({
     handleClickAgree: function () {
         var trendId = this.props.data;
-        var data = {trendId: trendId};
+        var data = {trendId: trendId};    //数据   动态 id ,
         $.ajax({
-            url: '/trend/agree',
-            type: 'POST',
-            dataType: 'json',
-            data: data,
+            url: '/trend/agre',   //接口的网址
+            type: 'POST',           //发送请求方式, 还有 get.
+            dataType: 'json',     //数据格式
+            data: data,             //发送的数据.
 
-            success: function () {
-                console.log('点赞');
+
+            //服务器进行处理.  如果 服务器执行成功  返回 状态  200 OK     失败   返回 400 error  401  500
+
+            success: function () {          //请求成功后执行这些
+                console.log('点赞成功');
             }.bind(this),
 
-            error: function () {
+            error: function () {            //请求失败 执行这些.
                 alert('点赞失败');
             }.bind(this)
 
@@ -121,6 +124,12 @@ var CommentForm = React.createClass({
             dataType: 'json',
             type: 'POST',
             data: comment,
+
+
+
+            //服务器的处理
+
+
             success: function () {
                 alert('评论发表成功！');
             }.bind(this),

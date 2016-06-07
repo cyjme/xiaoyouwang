@@ -19,6 +19,10 @@ Route::get('/test',function(){
   return 'test';
 });
 
+Route::get('/asp/sy1', function () {
+  return view('sy1');
+});
+
 
 //----------------------导航栏路由
 //特别推荐

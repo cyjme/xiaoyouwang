@@ -19,10 +19,8 @@ class DaohangController extends Controller
                        ->get();
     $sameFacultys = User::where('faculty', 'like', $user->faculty)
                        ->get();
-
     $sameGrades = User::where('grade', 'like', $user->grade)
                      ->get();
-
     return view('special',compact('sameSchools','sameFacultys','sameGrades'));
   }
 

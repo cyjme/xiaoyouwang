@@ -25,9 +25,7 @@ class AdminController extends Controller
             ->get();
         $zzqg = User::where('school_name','郑州轻工业学院')
             ->get();
-
         $number = ['xcxy'=>count($xcxy),'zzdx'=>count($zzdx),'hndx'=>count($hndx),'zzqg'=>count($zzdx)];
-
         return view('admin',compact('number'));
     }
 
